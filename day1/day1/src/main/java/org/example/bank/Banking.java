@@ -1,16 +1,18 @@
 package org.example.bank;
 
 public class Banking {
-    public static void main(String[] args) {
-        Account somkiat = new Account(1, 100);
-        Banking banking = new Banking();
-        banking.deposit(somkiat, 500);
-        System.out.println(somkiat.getBalance());
-    }
 
     public void deposit(Account target, int amount) {
-        target.addToBalance(amount);
+        if(amount >= 10) {
+            target.addToBalance(amount);
+        }
 //        TODO :: Create transaction
+        createTransaction("Deposit", target.getId(), amount);
+    }
+
+    private void createTransaction(String eventName, int id, int amount) {
+        Transaction transaction = new Transaction(eventName, id, amount);
+        // Save transaction to DB
     }
 
 }
