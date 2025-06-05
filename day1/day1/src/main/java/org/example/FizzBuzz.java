@@ -8,7 +8,7 @@ public class FizzBuzz {
     public String say(int input) {
         List<MyRule> rules = new ArrayList<>();
         rules.add(new RuleJava());
-        rules.add(new RuleFizzBuzz());
+        rules.add(new RuleFizzBuzzV2());
         rules.add(new RuleFizz());
         rules.add(new RuleBuzz());
 
