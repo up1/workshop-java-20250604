@@ -1,6 +1,9 @@
 package org.example;
 
-public class MyRange {
+/**
+ *
+ */
+public class MyRange extends Object {
 
     private final String input;
 
@@ -8,6 +11,10 @@ public class MyRange {
         this.input = input;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean startWithInclude() {
         return input.startsWith("[");
     }
