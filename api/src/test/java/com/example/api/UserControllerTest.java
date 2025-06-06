@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*;
@@ -31,5 +32,14 @@ class UserControllerTest {
         ErrorResponse result
                 = restTemplate.getForObject("/users/xxx", ErrorResponse.class);
         assertEquals("Input Invalid", result.getMessage());
+    }
+
+    @Test
+    @DisplayName("404 User not found with id=2")
+    void case03() {
+        ResponseEntity<ErrorResponse> result
+                = restTemplate.getForEntity("/users/2", ErrorResponse.class);
+        assertEquals(404, result.getStatusCode().value());
+        assertEquals("User not found", result.getBody().getMessage());
     }
 }

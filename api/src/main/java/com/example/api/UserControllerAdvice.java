@@ -19,4 +19,13 @@ public class UserControllerAdvice {
         return response;
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> case02(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(e.getMessage());
+        ResponseEntity<ErrorResponse> response
+                = new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(404));
+        return response;
+    }
+
 }
