@@ -42,4 +42,13 @@ class UserControllerTest {
         assertEquals(404, result.getStatusCode().value());
         assertEquals("User not found", result.getBody().getMessage());
     }
+
+    @Test
+    @DisplayName("404 Path invalid")
+    void case04() {
+        ResponseEntity<ErrorResponse> result
+                = restTemplate.getForEntity("/xxxxxx", ErrorResponse.class);
+        assertEquals(404, result.getStatusCode().value());
+        assertEquals("Path invalid", result.getBody().getMessage());
+    }
 }
