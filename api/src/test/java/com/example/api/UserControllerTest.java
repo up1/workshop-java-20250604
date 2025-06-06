@@ -17,6 +17,20 @@ class UserControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
+    @DisplayName("Success case :: create new user")
+    void case05() {
+        UserRequest somkiat = new UserRequest();
+        somkiat.setName("demo name");
+        somkiat.setEmail("demo email");
+        ResponseEntity<UserResponse> result
+                = restTemplate.postForEntity("/users", somkiat, UserResponse.class);
+
+        assertEquals(201, result.getStatusCode().value());
+        assertEquals("demo name", result.getBody().getName());
+        assertEquals("demo email", result.getBody().getEmail());
+    }
+
+    @Test
     @DisplayName("Success case")
     void case01() {
         UserResponse result
