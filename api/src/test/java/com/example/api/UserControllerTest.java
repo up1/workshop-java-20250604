@@ -21,13 +21,13 @@ class UserControllerTest {
     void case05() {
         UserRequest somkiat = new UserRequest();
         somkiat.setName("demo name");
-        somkiat.setEmail("demo email");
+        somkiat.setEmail("test@test.com");
         ResponseEntity<UserResponse> result
                 = restTemplate.postForEntity("/users", somkiat, UserResponse.class);
 
         assertEquals(201, result.getStatusCode().value());
         assertEquals("demo name", result.getBody().getName());
-        assertEquals("demo email", result.getBody().getEmail());
+        assertEquals("test@test.com", result.getBody().getEmail());
     }
 
     @Test
