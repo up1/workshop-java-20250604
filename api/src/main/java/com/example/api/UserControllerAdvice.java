@@ -3,6 +3,7 @@ package com.example.api;
 
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -10,6 +11,15 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice
 public class UserControllerAdvice {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> case04(MethodArgumentNotValidException e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(e.getFieldError().getDefaultMessage());
+        ResponseEntity<ErrorResponse> response
+                = new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(400));
+        return response;
+    }
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<ErrorResponse> case03(Exception e) {
