@@ -1,5 +1,6 @@
 package com.example.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,10 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> createUser(
+            @Valid @RequestBody UserRequest request) {
         System.out.println(request);
+
 
         // TODO :: Create data in database
         MyUser newUser = new MyUser();
