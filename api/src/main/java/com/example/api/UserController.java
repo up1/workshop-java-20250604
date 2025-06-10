@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
+    private UserRepository userRepository;
+
     @PostMapping("/users")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
         System.out.println(request);
+
+        // TODO :: Create data in database
+
+
 
         UserResponse userResponse = new UserResponse();
         userResponse.setName(request.getName());
