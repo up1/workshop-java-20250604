@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/users")
@@ -19,19 +19,7 @@ public class UserController {
             @Valid @RequestBody UserRequest request) {
         System.out.println(request);
 
-
-        // TODO :: Create data in database
-        MyUser newUser = new MyUser();
-        newUser.setId(1); // Manual
-        newUser.setName(request.getName());
-        newUser.setEmail(request.getEmail());
-        newUser = userRepository.save(newUser);
-
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(newUser.getId());
-        userResponse.setName(newUser.getName());
-        userResponse.setEmail(newUser.getEmail());
-
+        UserResponse userResponse = userService.register(request);
         ResponseEntity<UserResponse> response = new ResponseEntity<>(userResponse, HttpStatusCode.valueOf(201));
         return response;
     }
