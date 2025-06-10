@@ -7,19 +7,26 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/users")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
         System.out.println(request);
 
         // TODO :: Create data in database
-
-
+        MyUser newUser = new MyUser();
+        newUser.setId(1); // Manual
+        newUser.setName(request.getName());
+        newUser.setEmail(request.getEmail());
+        newUser = userRepository.save(newUser);
 
         UserResponse userResponse = new UserResponse();
-        userResponse.setName(request.getName());
-        userResponse.setEmail(request.getEmail());
+        userResponse.setName(newUser.getName());
+        userResponse.setEmail(newUser.getEmail());
 
         ResponseEntity<UserResponse> response = new ResponseEntity<>(userResponse, HttpStatusCode.valueOf(201));
         return response;

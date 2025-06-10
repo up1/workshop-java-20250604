@@ -26,6 +26,8 @@ class UserRepositoryTest {
         assertTrue(result.isPresent());
         assertEquals("Demo test", result.get().getName());
         assertEquals("Demo email", result.get().getEmail());
+
+        userRepository.findByNameAndEmail("", "");
     }
 
 }
