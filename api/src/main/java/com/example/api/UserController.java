@@ -25,6 +25,7 @@ public class UserController {
         newUser = userRepository.save(newUser);
 
         UserResponse userResponse = new UserResponse();
+        userResponse.setId(newUser.getId());
         userResponse.setName(newUser.getName());
         userResponse.setEmail(newUser.getEmail());
 
